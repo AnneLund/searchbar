@@ -32,8 +32,6 @@ a{
 }
 }
 `
-
-
 const HotelsByCity = () => {
 const [data, setData] = useState("");  
 const {id} =  useParams();

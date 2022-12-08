@@ -1,5 +1,6 @@
 import {createGlobalStyle} from 'styled-components'
 
+
 const Globals = createGlobalStyle`
 
 *{
@@ -23,21 +24,11 @@ button{
   padding: 8px 15px;
   border: none;
   color: #fff;
-  background-color: rgb(79, 79, 237);
+  background-color: red;
+  border-radius: 5px;
   margin: 5px;
 }
 
-main{
-  width: 100%;
-  margin: auto;
-
-h4{
-  margin-top: 1em;
-  font-weight: 400;
-  text-align: center;
-}
-
-}
 
 `
 

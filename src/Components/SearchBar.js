@@ -17,6 +17,22 @@ h3{
   margin-bottom: .5em;
 }
 `
+const SearchContainer = styled.div`
+  width: 50%;
+  position: absolute;
+  right: 25%;
+  top: 12%;
+  z-index: 1;
+  margin: auto;
+  border-radius: 5px;
+  background-color: #abcd;
+  padding: .5em;
+  h4{
+  margin-top: 1em;
+  font-weight: 400;
+  text-align: center;
+}
+`
 
 const SearchBar = () => {
 const [currentValue, setCurrentValue] = useState('');
@@ -27,7 +43,7 @@ return ({value: na.name, label: na.name})
 })
 
   return (
-    <main>
+    <SearchContainer>
       <h4>Søg i hele verden</h4>
       <div className='search'>
 <select
@@ -72,7 +88,7 @@ Søg
 })}
 
   </CityContainer>
-  </main>
+  </SearchContainer>
   )
 
    
