@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchBar from '../Components/SearchBar'
+import SearchBar from '../Components/SearchBar/SearchBar'
 import styled from 'styled-components'
 import header_image from '../Assets/Images/frankfurt-skyline-germany.jpg'
 import {OverLine, UnderLine, FrontText} from '../Styles/h1.styled'

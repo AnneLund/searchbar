@@ -19,9 +19,10 @@ flex-direction: column;
 
 export default function Cities({ items }) {
 
+
   return (
     <CityContainer>
-      {items.map((el) => (
+      {items?.map((el) => (
         <City key={el.id} style={el.type === 'hotel' ? {'display': 'none'} : null}>
             <figcaption>
                 <Link to={'/cities/' + el.id}>

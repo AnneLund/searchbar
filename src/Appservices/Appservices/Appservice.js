@@ -10,6 +10,12 @@ const GetList = (endpoint) => {
   });
 };
 
+const GetRoomList = (endpoint) => {
+  return Axios.get(`${API_URL}/${endpoint}`, {
+    headers: AuthHeader(),
+  });
+};
+
 const GetListFromKeyWord = (e, id) => {
   return Axios.get(`${API_URL}/${e}/${id}`, {
     headers: AuthHeader(),
@@ -58,6 +64,7 @@ const Delete = (e, id) => {
 
 const AppService = {
   GetList,
+  GetRoomList,
   GetDetail,
   GetListByCityId,
   GetRoomsFromHotel,

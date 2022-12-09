@@ -66,7 +66,7 @@ if (replaced !== '') {
 }
 
             return(
-                <Figure key={i}>
+                <Figure key={hotel.id}>
                 <figcaption>
                  <Link to={'/hotel/' + hotel.id}>
                   <h3>{hotel.title}</h3>   

@@ -1,13 +1,15 @@
 import React from 'react'
 import styled from 'styled-components';
-import useGetDestinationByEndPoint from '../Hooks/useGetDestinationByEndPoint';
+import useGetDestinationByEndPoint from '../../Hooks/useGetDestinationByEndPoint';
+import useIsOpenSearchBarStore from './useIsOpenSearchBarStore';
 import {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Outlet, useNavigate} from 'react-router-dom'
 
 const CityContainer = styled.div`
 display: flex;
 position: absolute;
-background-color: #fff9;
+z-index: 2;
+background-color: #fff;
 width: 100%;
 border-radius: 5px;
 padding: 1em;
@@ -74,16 +76,19 @@ input, select{
 `
 
 const SearchBar = () => {
-const [currentValue, setCurrentValue] = useState('');
+const [currentValue, setCurrentValue] = useState();
 const {state: country} = useGetDestinationByEndPoint('country');
 const [data, setData] = useState()
+const navigate = useNavigate();
+const {isOpen, setIsOpen} = useIsOpenSearchBarStore()
+console.log(isOpen)
 const selectCountry = country.map(na => {
 return ({value: na.name, label: na.name})
 })
 
   return (
     <>
-    <SearchContainer>
+    <SearchContainer onClick={() => setIsOpen(!isOpen)}>
       <header>
      <h4>Søg i hele verden</h4> 
      <p>Hvor vil du hen og hvornår?</p>  
@@ -130,14 +135,15 @@ return ({value: na.name, label: na.name})
 fetch("https://api.mediehuset.net/overlook/countries/" + currentValue)
 .then((response) => response.json())
 .then((data) => setData(data));
+navigate('/cities/' + currentValue);
 }}>
 Søg
 </button>   
   </SearchContainer>
 
-  {data? <CityContainer>
+{/* <CityContainer  isOpen={isOpen}>
 {data?.item.cities.items.map(city => {
-  console.log(city)
+
   return(
        <Link key={city.id} to={'/cities/' + city.id}>
           <figure >
@@ -149,9 +155,7 @@ Søg
        </Link>
   )
 })}
-
-  </CityContainer> : null}
-
+  </CityContainer> */}
   </>
   )
 

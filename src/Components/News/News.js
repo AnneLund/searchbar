@@ -18,7 +18,7 @@ p{
   font-size: 0.8em;
 }
 h3{
-  margin: 0.2em 0;
+  margin: 0.2em;
 }
 `
 
