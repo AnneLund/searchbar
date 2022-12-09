@@ -12,6 +12,12 @@ margin: auto;
 
 h3{
     margin-bottom: 0;
+    color: black;
+    font-size: .8em;
+    &:hover{
+        color: red;
+        transition: 500ms;
+    }
 }
 
 .stars{

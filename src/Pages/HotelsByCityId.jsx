@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import {useParams, Link} from 'react-router-dom'
+import {useParams, Link, Outlet} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import { FaStar } from "react-icons/fa";
-import Figure from '../../Styles/Figure';
+import Figure from '../Styles/Figure';
 
 const Hotels = styled.article`
 margin: 1em;
@@ -32,12 +32,12 @@ a{
 }
 }
 `
-const HotelsByCity = () => {
+const HotelsByCityId = () => {
 const [data, setData] = useState("");  
 const {id} =  useParams();
 
 const getData = () => {
-    fetch("https://api.mediehuset.net/overlook/hotels/by_city/" + id)
+    fetch("https://api.mediehuset.net/overlook/cities/by_country/" + id)
           .then(response => {
             return response.json()
           })
@@ -56,31 +56,37 @@ useEffect(() => {
    <h1>Byens hoteller</h1>
 {data.status === 'Ok' ?   
 
-data.items.map((hotel, i) => {
+// const str = hotel.num_stars;
+// const replaced = str.replace(/\D/g, '');
+// let num;
+// if (replaced !== '') {
+//   num = Number(replaced);
+// }
 
-const str = hotel.num_stars;
-const replaced = str.replace(/\D/g, '');
-let num;
-if (replaced !== '') {
-  num = Number(replaced);
-}
+<section>
 
-            return(
-                <Figure key={i}>
+  {data.items.map(hotel => {
+    return(
+<Figure>
                 <figcaption>
-                 <Link to={'/hotel/' + hotel.id}>
-                  <h3>{hotel.title}</h3>   
-                </Link>  
-                  <p className='stars'>{hotel.num_stars ? Array(num).fill(<FaStar fill='#F5E247'/>) : null }</p>
+                 
+                  <h3>{hotel.name}</h3>   
+             
+                  {/* <p className='stars'>{hotel.num_stars ? Array(num).fill(<FaStar fill='#F5E247'/>) : null }</p> */}
                   <p className='teaser'>{hotel.teaser}</p>  
                 </figcaption>
                <img src={hotel.image}/>
-                </Figure>  
-              
-            )
-        }) : null }
+          
+                </Figure>       
+    )
+  })}
+  
+
+</section>
+            
+         : null }
     </Hotels>
   )
 }
 
-export default HotelsByCity
+export default HotelsByCityId;

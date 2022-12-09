@@ -13,23 +13,20 @@ const Globals = createGlobalStyle`
 .search{
  text-align: center;
 }
-
+/* 
 .input-cont{
-  width: 50%;
   height: 2em;
   margin: 1em 0;
  
-}
+} */
 button{
   padding: 8px 15px;
   border: none;
   color: #fff;
   background-color: red;
   border-radius: 5px;
-  margin: 5px;
+  margin-right: 2em;
 }
-
-
 `
 
 export default Globals;

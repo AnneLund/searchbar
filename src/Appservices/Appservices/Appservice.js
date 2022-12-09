@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-import { API_URL, Base_URL, HOTEL_URL, ROOM_URL } from "./API_URL";
+import { API_URL, Base_URL, CITY_URL, ROOM_URL } from "./API_URL";
 
 import AuthHeader from "./auth-header";
 
@@ -18,6 +18,12 @@ const GetListFromKeyWord = (e, id) => {
 
 const GetRoomsFromHotel = (e, id) => {
   return Axios.get(`${ROOM_URL}/${e}/${id}`, {
+    headers: AuthHeader(),
+  });
+};
+
+const GetListByCityId = (e, id) => {
+  return Axios.get(`${CITY_URL}/${e}/${id}`, {
     headers: AuthHeader(),
   });
 };
@@ -53,6 +59,7 @@ const Delete = (e, id) => {
 const AppService = {
   GetList,
   GetDetail,
+  GetListByCityId,
   GetRoomsFromHotel,
   GetListFromKeyWord,
   Create,
