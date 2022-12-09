@@ -21,6 +21,8 @@ height: 40vh;
 
 const Nav = styled.nav`
 padding: 1em;
+background-color: whitesmoke;
+box-shadow: #00000075 2px 2px 2px;
 ul{
   display: flex;
   justify-content: center;
@@ -41,6 +43,7 @@ const CityContainer = styled.article`
   flex-wrap: wrap;
   gap: 2em;
   width: 50%;
+  padding-top: 2em;
   margin: auto;
   img{
     width: 200px;

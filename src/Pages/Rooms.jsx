@@ -32,24 +32,11 @@ img{
 `
 
 const Rooms = () => {
-const {state: rooms} = useGetRoomList('rooms');
 
-  return (
+return (
 <Latest>
-<h4>Se vores nyheder</h4>
-{rooms.map(news => {
+<h4>Se vores værelser</h4>
 
-      return(
-
-<FigureNews key={news.id}>
-<img src={news.image}/>
-<figcaption>
-  <h3>{news.title}</h3>
-  <p>{news.teaser}</p>
-</figcaption>
-    </FigureNews>  
-      )
-  })}
 </Latest> 
   ) 
 }

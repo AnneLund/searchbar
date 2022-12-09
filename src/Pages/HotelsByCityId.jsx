@@ -8,17 +8,19 @@ import {RoomsContainer, Room} from '../Styles/Rooms.styled'
 import crown from '../Assets/Images/overlook-crown.jpg'
 import ShowMore from 'react-show-more-button';
 
-const Hotel = styled.article`
+const Country = styled.div`
+margin: 0 auto;
+width: 100%;
 header{
-height: 15vh;
+height: 10vh;
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-background-color: #000d;
-h1{
+background-color: #000000cf;
+h3{
   color: white;
-  font-size: 5vw;
+  font-size: 3vw;
   text-shadow: grey 2px 2px 10px;
 }
 
@@ -26,6 +28,15 @@ h1{
   color: #ff99;
   font-size: 1.5em;
 }
+
+
+}
+img{
+  width: 50%;
+}
+
+figcaption{
+  font-size: 0.8em;
 }
 `
 
@@ -38,6 +49,41 @@ display: flex;
 justify-content: center;
 align-items: center;
 height: 30vh;
+`
+
+const HotelsContainer = styled.div`
+h2{
+text-align: center;
+margin: 1em;
+font-size: 2em;
+}  
+`
+
+const CityContainer = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+`
+
+const City = styled.figure`
+  width: 70%;
+  display: flex;
+  margin: 1em auto;
+  background-color: #cbcbcba1;
+  box-shadow: #0000009b 5px 5px 5px;
+  padding: 1em;
+  gap: 3em;
+  figcaption{
+    width: 50%;
+    h3{
+    font-weight: 600;
+    margin-bottom: .5em;
+  }  
+  }
+
+  img{
+    width: 250px;
+    height: 200px;
+  }
 `
 
 const Gallery = styled.div`
@@ -56,7 +102,7 @@ const [data, setData] = useState("");
 const {id} =  useParams();
 
 const getData = () => {
-    fetch("https://api.mediehuset.net/overlook/rooms/by_hotel/" + id)
+    fetch("https://api.mediehuset.net/overlook/countries/" + id)
           .then(response => {
             return response.json()
           })
@@ -70,45 +116,40 @@ useEffect(() => {
     getData();
 }, [])
 
-return (
-       
+return (   
   <>
       {data.status === 'Ok' ?   
    <article>         
   <Container>
     <FrontText>
-          <OverLine><h1>Find dit værelse</h1> </OverLine>
+          <OverLine><h1>Find din by</h1> </OverLine>
           <UnderLine></UnderLine>    
           </FrontText>  
   </Container>
   
-  <RoomsContainer>
-    <h2>Find dit værelse</h2>
-  {data.items.map(room => {
-    return(
-      <Room>
+
+      <Country>
+         <header>
+          <h3>{data.item.name}</h3>  
+        </header> 
+      </Country>
+
+      <CityContainer>
+
+        {data.item.cities.items.map(city => {
+          return(
+        <City>
+<figcaption>
+  <h3>{city.name}</h3>
+  <p>{city.description}</p>
+</figcaption>
+<img src={city.image} alt={city.name}/>
+        </City>   
+          )
+        })}
   
-        <img src={room.images[0].image}/>
-  
-    <ShowMore maxHeight={240}>
-      <figcaption>
-        <h3>{room.room_title}</h3>
-        <h4>{room.hotel_name}</h4>
-        <h5>{room.area}. Plads til {room.num_persons} personer</h5>
-        <p>{room.description}</p>
-        <p className='price'>Fra {room.day_price_normal} DKK</p>
-      </figcaption>
-    
-  <Gallery>
-    {room.images.map(img => {
-      return <img key={img.id} src={img.image} alt={img.title}/>
-    })}
-  </Gallery>
-       </ShowMore>
-      </Room>
-    )
-  })}
-  </RoomsContainer>
+      </CityContainer>
+
   
   </article>
   : null }

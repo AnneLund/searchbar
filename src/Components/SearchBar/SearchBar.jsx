@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import useGetDestinationByEndPoint from '../../Hooks/useGetDestinationByEndPoint';
 import useIsOpenSearchBarStore from './useIsOpenSearchBarStore';
 import {useState} from 'react'
-import {Link, Outlet, useNavigate} from 'react-router-dom'
+import {Link, Outlet, useNavigate, useParams} from 'react-router-dom'
 
 const CityContainer = styled.div`
 display: flex;
@@ -80,6 +80,7 @@ const [currentValue, setCurrentValue] = useState();
 const {state: country} = useGetDestinationByEndPoint('country');
 const [data, setData] = useState()
 const navigate = useNavigate();
+const {id} = useParams()
 const {isOpen, setIsOpen} = useIsOpenSearchBarStore()
 console.log(isOpen)
 const selectCountry = country.map(na => {
@@ -132,9 +133,6 @@ return ({value: na.name, label: na.name})
  </select>
 </Input>
 <button onClick={() => {
-fetch("https://api.mediehuset.net/overlook/countries/" + currentValue)
-.then((response) => response.json())
-.then((data) => setData(data));
 navigate('/cities/' + currentValue);
 }}>
 Søg
